@@ -1,54 +1,48 @@
 #include <iostream>
 
+int add(int a, int b);
+int sub(int a, int b);
+int multiple(int a, int b);
+float divide(int a, int b);
+void isOdd(int num);
+int findMax(int, int, int);
 using namespace std;
 
 int main() {
-	cout << "나이를 입력하세요 : ";
-	int age;
-	cin >> age;
+	int a = 7, b = 12, c = -7;
 
-	if (age > 0 && age < 8) cout << "유아\n";
-	else if (age >= 8 && age <= 13) cout << "초등학생\n";
-	else if (age >= 14 && age <= 16) cout << "중학생\n";
-	else if (age >= 17 && age <= 19) cout << "고등학생\n";
-	else if (age >= 20) cout << "성인\n";
-	else cout << "나이가 너무 많습니다..!\n";
-	cout << "\n이름을 입력하세요 : ";
-	string name;
-	cin >> name;
-
-	if (name == "홍길동") cout << "남자\n";
-	else if (name == "성춘향") cout << "여자\n";
-	else cout << "모르겠어요.\n";
-	cout << "\n숫자를 입력하세요 : ";
-	int num;
-	cin >> num;
-	num % 5 == 0 ? cout << num << "는 5의 배수입니다.\n" : cout << num << "는 5의 배수가 아니에요ㅜㅜ\n";
-	cout << "\n연산할 정수 두 개를 입력해 주세요 : ";
-	int n1, n2;
-	cin >> n1;
-	cin >> n2;
-
-	cout << "연산자를 입력해주세요. (+ - * /) : ";
-	char op;
-	cin >> op;
-
-	cout << "연산 결과 : ";
-	switch (op) {
-	case '+' :
-		cout << n1 + n2;
-		break;
-	case '-' :
-		cout << n1 - n2;
-		break;
-	case '*':
-		cout << n1 * n2;
-		break;
-	case '/':
-		cout << "몫 : " << n1 / n2 << " 나머지 : " << n1 % n2;
-		break;
-
-	}
-
+	cout << "a : " << a << " b : " << b << '\n';
+	cout << "add : " << add(a, b) << '\n';
+	cout << "minus : " << sub(a, b) << '\n';
+	cout << "multiple : " << multiple(a, b) << '\n';
+	cout << "divide : " << divide(a, b) << '\n';
+	isOdd(a);
+	cout << a << "와 " << b << "와 " << c << " 중 가장 큰 수 : " << findMax(a, b, c);
 	return 0;
+}
+
+
+int add(int a, int b) {
+	return a + b;
+}
+
+int sub(int a, int b) {
+	return max(a, b) - min(a, b);
+}
+
+int multiple(int a, int b) {
+	return a * b;
+}
+
+float divide(int a, int b) {
+	return (float)a / b;
+}
+
+void isOdd(int num) {
+	if (num % 2 == 0) cout << num << "는(은) 짝수입니다.\n";
+	else cout << num << "는(은) 홀수입니다.\n";
+}
+
+int findMax(int a, int b, int c) {
+	return max(a, max(b, c));
 }
