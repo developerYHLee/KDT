@@ -1,2 +1,6 @@
 ﻿  소스.cpp
+C:\Users\LYHo\Desktop\KDT\Project1\소스.cpp(30,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\LYHo\Desktop\KDT\Project1\소스.cpp(44,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\LYHo\Desktop\KDT\Project1\소스.cpp(78,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\LYHo\Desktop\KDT\Project1\소스.cpp(79,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Project1.vcxproj -> C:\Users\LYHo\Desktop\KDT\Project1\Debug\Project1.exe
