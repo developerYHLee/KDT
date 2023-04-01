@@ -62,6 +62,7 @@ int main() {
 	
 	cout << endl;
 	*/
+	file3.close();
 
 	cout << "이름을 입력하세요 : ";
 	string name1;
@@ -92,17 +93,20 @@ int main() {
 
 		ifstream file6("member_tel.txt");
 		string info;
-		if (file6.is_open()) {
+		if (!file6) {
 			while (getline(file6, info)) infos.push_back(info);
 		}
 
 		ofstream file5("member_tel.txt");
 		for (string info : infos) file5 << info << endl;
 		file5 << name1 << ' ' << l << endl;
+	
+		file5.close();
+		file6.close();
 	}
 	else cout << "로그인 실패" << endl << endl;
 	file4.close();
-
+	
 	ifstream file;
 	file.open("hello.txt");
 	vector<string> line;

@@ -1,6 +1,2 @@
-﻿  2주차-2.cpp
-C:\Users\LYHo\Desktop\KDT\Project1\2주차-2.cpp(23,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\LYHo\Desktop\KDT\Project1\2주차-2.cpp(35,13): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\LYHo\Desktop\KDT\Project1\2주차-2.cpp(29,8): warning C4101: 'num' :참조되지 않은 지역 변수입니다.
-C:\Users\LYHo\Desktop\KDT\Project1\2주차-2.cpp(96,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+﻿  블로그Test.cpp
   Project1.vcxproj -> C:\Users\LYHo\Desktop\KDT\Project1\Debug\Project1.exe

@@ -201,6 +201,9 @@ int main() {
 		writeGame.open("demoGame.txt");
 	}
 
+	readGame.close();
+	writeGame.close();
+
 	while (true) {
 		char setPlayer;
 
