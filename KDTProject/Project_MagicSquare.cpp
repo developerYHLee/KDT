@@ -40,13 +40,9 @@ int main() {
 		
 		//다음 번에 확인할 행열이 0이 될 때까지 반복한다.
 		if (map[col][row] != 0) { 
-			col++; row--; 
-			if (col >= N) col = 0;
+			col += 2; row--; 
+			if (col >= N) col -= N;
 			if (row < 0) row = N - 1;
-		}
-		while (map[col][row] != 0) {
-			col++;
-			if (col >= N) col = 0;
 		}
 	}
 

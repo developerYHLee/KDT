@@ -17,7 +17,7 @@ int main() {
 		size = vis.size();
 
 		for (int i = 0; i < size - 1; i++) cout << vis[i] << "->";
-		
+
 		if (size > 0) cout << vis[size - 1] << endl;
 		
 		cout << "다음 단어를 입력하세요 : ";
