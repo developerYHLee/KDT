@@ -49,14 +49,30 @@ int main() {
 	//자릿수를 만드는 이유는 출력 시 깔끔하게 보이게 하기 위해 만든다.
 	int digit = makeDigit(N * N);
 
+	int* sum1 = new int[N] {0};
+	int* sum2 = new int[N] {0};
+
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			int num_digit = makeDigit(map[i][j]);
 			for (int k = num_digit; k < digit; k++) cout << ' ';
 			cout << map[i][j] << ' ';
+			sum1[i] += map[i][j];
+			sum2[j] += map[i][j];
 		}
 		cout << endl;
 	}
+
+	cout << endl << "같은 행의 값들의 합 : ";
+	for (int i = 0; i < N; i++) cout << sum1[i] << ' ';
+
+	cout << endl << "같은 열의 값들의 합 : ";
+	for (int i = 0; i < N; i++) cout << sum2[i] << ' ';
+
+	cout << endl;
+
+	delete[] sum1;
+	delete[] sum2;
 
 	for (int i = 0; i < N; i++) delete[] map[i];
 	delete[] map;
