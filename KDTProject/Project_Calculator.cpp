@@ -95,7 +95,6 @@ int main() {
 
 		printRes();
 
-		cin.ignore();
 		cout << "연산을 계속 진행하시겠습니까? (Y : 계속, AC : 초기화, EXIT : 종료) : ";
 		string s;
 		cin >> s;
