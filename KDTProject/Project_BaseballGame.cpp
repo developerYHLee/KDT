@@ -29,6 +29,7 @@ void throwTheBall() {
 			i--;
 			continue;
 		}
+		vis[num] = true;
 
 		computerNum[i] = num;
 	}
@@ -40,16 +41,24 @@ int main() {
 
 	int count = 0;
 	while (true) {
+		start:
 		cout << "1~9 사이의 숫자 3개를 입력 하시오 (이외의 숫자 : 종료)\n";
 		string num;
 		getline(cin, num);
 		vector<int> userNum = split(num);
 		
+		bool vis[10] = { false };
 		for (int i = 0; i < 3; i++) {
 			if (userNum[i] <= 0 || userNum[i] > 9) {
 				cout << "게임을 종료하였습니다.\n";
 				return 0;
 			}
+
+			if (vis[userNum[i]]) {
+				cout << "중복해서 입력하지 마세요.\n";
+				goto start;
+			}
+			vis[userNum[i]] = true;
 		}
 
 		count++;
@@ -60,6 +69,7 @@ int main() {
 
 				if (i == j) strike++;
 				else ball++;
+				break;
 			}
 		}
 
