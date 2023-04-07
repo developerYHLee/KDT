@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int computerNum[3];
+int computerNum[SIZE];
 
 int* split(string str) {
 	int n, i = 0;
@@ -74,7 +74,7 @@ int main() {
 			}
 		}
 
-		if (strike == 3) break;
+		if (strike == SIZE) break;
 
 		cout << "Strike : " << strike << "\tBall : " << ball << endl;
 	}

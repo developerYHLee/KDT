@@ -31,7 +31,7 @@ public:
 		resetCharater();
 	}
 
-	Character(int hp, int level) {
+	Character(int hp, int level, string sword, string gun) {
 		resetCharater();
 	}
 };
