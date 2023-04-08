@@ -7,19 +7,10 @@ public:
 	static double num;
 	double n;
 	char oper;
+	virtual void calculate(double n) {
+		cout << "부모 클래스 TestOperator의 calculate 함수 실행\n";
+	}
 
-	virtual void add(double n) {
-		cout << "TestOperator 클래스의 add 함수 호출\n";
-	}
-	virtual void sub(double n) {
-		cout << "TestOperator 클래스의 sub 함수 호출\n";
-	}
-	virtual void mul(double n) {
-		cout << "TestOperator 클래스의 mul 함수 호출\n";
-	}
-	virtual void div(double n) {
-		cout << "TestOperator 클래스의 div 함수 호출\n";
-	}
 	void reset() {
 		TestOperator::num = 0;
 
@@ -45,19 +36,19 @@ double TestOperator::num = 0;
 
 class TestAdd : public TestOperator {
 public:
-	void add(double n) { TestOperator::num += n; }
+	void calculate(double n) { TestOperator::num += n; }
 };
 class TestSubtract : public TestOperator {
 public:
-	void sub(double n) { TestOperator::num -= n; }
+	void calculate(double n) { TestOperator::num -= n; }
 };
 class TestMultiply : public TestOperator {
 public:
-	void mul(double n) { TestOperator::num *= n; }
+	void calculate(double n) { TestOperator::num *= n; }
 };
 class TestDivide : public TestOperator {
 public:
-	void div(double n) { TestOperator::num /= n; }
+	void calculate(double n) { TestOperator::num /= n; }
 };
 
 void printRes() {
@@ -74,25 +65,22 @@ int main() {
 		{
 		case '+':
 			calculator = new TestAdd();
-			calculator->add(n);
 			break;
 		case '-':
 			calculator = new TestSubtract();
-			calculator->sub(n);
 			break;
 		case '*':
 			calculator = new TestMultiply();
-			calculator->mul(n);
 			break;
 		case '/':
 			calculator = new TestDivide();
-			calculator->div(n);
 			break;
 		default:
 			cout << "잘못된 입력이 들어왔습니다. 다시 입력하세요.\n\n";
 			break;
 		}
 
+		calculator->calculate(n);
 		printRes();
 
 		cout << "연산을 계속 진행하시겠습니까? (Y : 계속, AC : 초기화, EXIT : 종료) : ";
