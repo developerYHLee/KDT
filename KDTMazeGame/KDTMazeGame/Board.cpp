@@ -83,6 +83,7 @@ void Board::Draw()
 		}
 		cout << endl;
 	}
+	cout << "\n";
 }
 
 int Board::getSize() { return _size; }

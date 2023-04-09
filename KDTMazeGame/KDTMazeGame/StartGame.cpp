@@ -99,11 +99,12 @@ void StartGame::bfs() {
 
 void StartGame::playGame()
 {
+	cout << "\n미로 찾기 시작!\n위치 알림 찬스가 한번 있습니다.\n현재 위치를 알고 싶으면 9를 입력하세요.\n\n";
 	stack<Path> S;
 
 	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0,0,-1,1 };
 
-	int curRow = 0, curCol = 0, vis = 0, count = 0;
+	int curRow = 0, curCol = 0, vis = 0, count = 0, getLocate = 1;
 	while (true) {
 		cout << "이동 가능한 방향(";
 
@@ -138,6 +139,17 @@ void StartGame::playGame()
 
 		int order;
 		cin >> order;
+
+		if (order == 9) {
+			if (getLocate == 0) {
+				cout << "위치 알림 찬스를 이미 사용했습니다.\n\n";
+				continue;
+			}
+
+			getLocate--;
+			cout << "현재 위치 : " << curRow << "행 " << curCol << "열\n\n";
+			continue;
+		}
 
 		if (pathCount > 1) S.push(Path(curRow, curCol, order));
 
