@@ -12,7 +12,6 @@ int main() {
 	Board board(size);
 
 	while (true) {
-
 		cout << "명령을 입력하세요. (1 : 미로 게임 시작, 2 : 최단거리 확인, 3 : 미로 확인, 0 : 종료) : ";
 		int order;
 		cin >> order;
