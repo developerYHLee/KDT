@@ -63,44 +63,10 @@ void StartGame::printDir(int i) {
 	else cout << " 우 : 3";
 }
 
-void StartGame::bfs() {
-	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0,0,-1,1 };
-
-	bool** vis = new bool* [_size];
-	for (int i = 0; i < _size; i++) {
-		vis[i] = new bool[_size];
-
-		for (int j = 0; j < _size; j++) vis[i][j] = false;
-	}
-	queue<Path> Q;
-	Q.push(Path(0, 0, 0));
-	vis[0][0] = true;
-
-	while (!Q.empty()) {
-		Path cur = Q.front();
-		Q.pop();
-
-		if (cur._row == endRow && cur._col == endCol) {
-			cout << "최단시도 : " << cur._vis << "\n\n";
-			return;
-		}
-
-		for (int i = 0; i < 4; i++) {
-			int row = cur._row + dx[i];
-			int col = cur._col + dy[i];
-
-			if (row < 0 || col < 0 || row >= _size || col >= _size || vis[row][col] || isWall[row][col]) continue;
-
-			Q.push(Path(row, col, cur._vis + 1));
-			vis[row][col] = true;
-		}
-	}
-}
-
 void StartGame::playGame()
 {
 	cout << "\n미로 찾기 시작!\n위치 알림 찬스가 한번 있습니다.\n현재 위치를 알고 싶으면 9를 입력하세요.\n\n";
-	stack<Path> S;
+	Path* P = new Path(0, 0, 0);
 
 	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0,0,-1,1 };
 
@@ -122,14 +88,18 @@ void StartGame::playGame()
 
 		int* path;
 		if (pathCount == 0) {
+			if (curRow == 0 && curCol == 0) {
+				cout << " ) :\n시작 지점입니다.\n\n";
+				vis = 0;
+				continue;
+			}
+
 			cout << " )\n";
 			cout << "길이 막혔으니 돌아가야합니다!\n";
-			Path crossRoad = S.top();
-			S.pop();
 
-			curRow = crossRoad._row;
-			curCol = crossRoad._col;
-			vis = crossRoad._vis;
+			curRow = P->_row;
+			curCol = P->_col;
+			vis = P->_vis;
 
 			cout << "갈림길로 돌아갔습니다.\n\n";
 
@@ -151,7 +121,7 @@ void StartGame::playGame()
 			continue;
 		}
 
-		if (pathCount > 1) S.push(Path(curRow, curCol, order));
+		if (pathCount > 1) P = new Path(curRow, curCol, order);
 
 		path = move(order, curRow, curCol);
 		curRow = path[0];
@@ -163,7 +133,11 @@ void StartGame::playGame()
 			cout << "미로를 빠져나왔습니다!\n";
 			break;
 		}
+
+		delete path;
 	}
 
 	cout << "미로를 탈출하는데 " << count << "번 시도했습니다.\n\n";
+
+	delete P;
 }

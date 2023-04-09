@@ -20,7 +20,7 @@ int main() {
 		StartGame startGame(board);
 		
 		if (order == 1) startGame.playGame();
-		else if (order == 2) startGame.bfs();
+		else if (order == 2) board.bfs(true);
 		else if (order == 3) board.Draw();
 		else if (order == 0) break;
 	}
