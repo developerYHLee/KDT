@@ -10,7 +10,7 @@ using namespace std;
 class Board
 {
 private:
-	int _size;
+	int _size, endRow, endCol;
 	bool** isWall;
 public:
 	Board(int size);
@@ -19,6 +19,8 @@ public:
 	void Draw();
 	int getSize();
 	bool** getIsWall();
+	int getEndRow();
+	int getEndCol();
 };
 
 #endif // !__BOARD_H__

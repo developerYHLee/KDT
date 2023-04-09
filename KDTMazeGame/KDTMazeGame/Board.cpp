@@ -3,6 +3,8 @@
 Board::Board(int size)
 {
 	_size = size;
+	endRow = -1;
+	endCol = -1;
 	Initialize();
 	Draw();
 }
@@ -32,7 +34,8 @@ void Board::Initialize()
 		int count = 1;
 		for (int j = 0; j < _size; j++) {
 			if (i % 2 == 0 || j % 2 == 0) continue;
-
+			if (i == _size - 2 && j == _size - 2) continue;
+			
 			if (i == _size - 2) {
 				isWall[i][j + 1] = false;
 				continue;
@@ -55,6 +58,13 @@ void Board::Initialize()
 			}
 		}
 	}
+
+	while (true) {
+		endRow = rand() % _size;
+		endCol = rand() % _size;
+
+		if (!isWall[endRow][endCol]) break;
+	}
 }
 
 void Board::Draw()
@@ -64,6 +74,10 @@ void Board::Draw()
 
 	for (int i = 0; i < _size; i++) {
 		for (int j = 0; j < _size; j++) {
+			if (i == endRow && j == endCol) {
+				cout << "□";
+				continue;
+			}
 			if (isWall[i][j]) cout << "■";
 			else cout << "  ";
 		}
@@ -73,3 +87,13 @@ void Board::Draw()
 
 int Board::getSize() { return _size; }
 bool** Board::getIsWall() { return isWall; }
+
+int Board::getEndRow()
+{
+	return endRow;
+}
+
+int Board::getEndCol()
+{
+	return endCol;
+}
