@@ -1,11 +1,22 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 
 #include "Board.h"
 
 using namespace std;
 
 bool** isWall;
+
+struct Path {
+	int _row, _col, _vis;
+
+	Path(int row, int col, int vis) {
+		_row = row;
+		_col = col;
+		_vis = vis;
+	}
+};
 
 void printDir(int i) {
 	if (i == 0) cout << " 상 : 0";
@@ -62,20 +73,46 @@ int* move(int order, int row, int col, int size) {
 	return res;
 }
 
-int main() {
-	cout << "미로의 크기를 입력하세요. (홀수만 입력) : ";
-	int size;
-	cin >> size;
-
-	Board board(size);
-	cout << "\n\n";
-	
-	isWall = board.getIsWall();
-	stack<int*> S;
-	
+void bfs(int size) {
 	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0,0,-1,1 };
+
+	bool** vis = new bool* [size];
+	for (int i = 0; i < size; i++) {
+		vis[i] = new bool[size];
+
+		for (int j = 0; j < size; j++) vis[i][j] = false;
+	}
+	queue<Path> Q;
+	Q.push(Path(0,0,0));
+	vis[0][0] = true;
 	
-	int curRow = 0, curCol = 0, vis = 0;
+	while (!Q.empty()) {
+		Path cur = Q.front();
+		Q.pop();
+
+		if (cur._row == size - 2 && cur._col == size - 1) {
+			cout << "최단시도 : " << cur._vis << "\n\n";
+			return ;
+		}
+
+		for (int i = 0; i < 4; i++) {
+			int row = cur._row + dx[i];
+			int col = cur._col + dy[i];
+
+			if (row < 0 || col < 0 || row >= size || col >= size || vis[row][col] || isWall[row][col]) continue;
+
+			Q.push(Path(row, col, cur._vis + 1));
+			vis[row][col] = true;
+		}
+	}
+}
+
+void playGame(int size) {
+	stack<Path> S;
+
+	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0,0,-1,1 };
+
+	int curRow = 0, curCol = 0, vis = 0, count = 0;
 	while (true) {
 		cout << "이동 가능한 방향(";
 
@@ -85,7 +122,7 @@ int main() {
 			int col = curCol + dy[i];
 
 			if (row < 0 || col < 0 || row >= size || col >= size || isWall[row][col]) continue;
-			
+
 			printDir(i);
 			if (vis == i) cout << "(방금 지나온 길)";
 			else pathCount++;
@@ -95,12 +132,12 @@ int main() {
 		if (pathCount == 0) {
 			cout << " )\n";
 			cout << "길이 막혔으니 돌아가야합니다!\n";
-			int* crossRoad = S.top();
+			Path crossRoad = S.top();
 			S.pop();
 
-			curRow = crossRoad[0];
-			curCol = crossRoad[1];
-			vis = crossRoad[2];
+			curRow = crossRoad._row;
+			curCol = crossRoad._col;
+			vis = crossRoad._vis;
 
 			cout << "갈림길로 돌아갔습니다.\n\n";
 			continue;
@@ -110,14 +147,7 @@ int main() {
 		int order;
 		cin >> order;
 
-		if (pathCount > 1) {
-			int* cross = new int[3];
-			cross[0] = curRow;
-			cross[1] = curCol;
-			cross[2] = order;
-
-			S.push(cross);
-		}
+		if (pathCount > 1) S.push(Path(curRow, curCol, order));
 
 		path = move(order, curRow, curCol, size);
 		curRow = path[0];
@@ -128,5 +158,33 @@ int main() {
 			cout << "미로를 빠져나왔습니다!\n";
 			break;
 		}
+
+		count++;
 	}
+
+	cout << "미로를 탈출하는데 " << count << "번 시도했습니다.\n\n";
+}
+
+int main() {
+	cout << "미로의 크기를 입력하세요. (홀수만 입력) : ";
+	int size;
+	cin >> size;
+
+	Board board(size);
+	cout << "\n";
+	
+	isWall = board.getIsWall();
+	
+	while (true) {
+		cout << "명령을 입력하세요. (1 : 미로 게임 시작, 2 : 최단거리 확인, 0 : 종료) : ";
+		int order;
+		cin >> order;
+
+		if (order == 1) playGame(size);
+		else if (order == 2) bfs(size);
+		else if (order == 0) break;
+
+	}
+
+	cout << "미로 게임 종료\n";
 }

@@ -1,3 +1,10 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 중간 디렉터리(Debug\)에 다른 프로젝트(Project1.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  Project_Calculator.cpp
-  Project1.vcxproj -> C:\Users\LYHo\Desktop\KDT\KDTProject\Debug\KDTProject.exe
+  Test.cpp
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(187,31): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(203,38): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(217,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(279,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(296,12): warning C4101: 'R' :참조되지 않은 지역 변수입니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(296,15): warning C4101: 'U' :참조되지 않은 지역 변수입니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(296,9): warning C4101: 'N' :참조되지 않은 지역 변수입니다.
+C:\Users\LYHo\Desktop\KDT\KDTProject\Test.cpp(330): error C4703: 초기화되지 않았을 수 있는 로컬 포인터 변수 'c1'이(가) 사용되었습니다.

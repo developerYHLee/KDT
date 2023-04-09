@@ -42,8 +42,6 @@ void Board::Initialize()
 				continue;
 			}
 
-			isWall[0][0] = false;
-			isWall[0][1] = false;
 
 			int road = rand() % 2;
 			if (road == 0) {
@@ -61,6 +59,9 @@ void Board::Initialize()
 
 void Board::Draw()
 {
+	isWall[0][0] = false;
+	isWall[0][1] = false;
+
 	for (int i = 0; i < _size; i++) {
 		for (int j = 0; j < _size; j++) {
 			if (isWall[i][j]) cout << "■";
