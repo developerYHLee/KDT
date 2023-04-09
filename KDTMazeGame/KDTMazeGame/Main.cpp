@@ -71,7 +71,7 @@ int main() {
 	cout << "\n\n";
 	
 	isWall = board.getIsWall();
-	stack<pair<int, int>> S;
+	stack<int*> S;
 	
 	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0,0,-1,1 };
 	
@@ -90,22 +90,43 @@ int main() {
 			if (vis == i) cout << "(방금 지나온 길)";
 			else pathCount++;
 		}
-		cout << " ) : ";
-		if (pathCount == 0) {
-			cout << "돌아가야합니다!\n\n";
 
+		int* path;
+		if (pathCount == 0) {
+			cout << " )\n";
+			cout << "길이 막혔으니 돌아가야합니다!\n";
+			int* crossRoad = S.top();
+			S.pop();
+
+			curRow = crossRoad[0];
+			curCol = crossRoad[1];
+			vis = crossRoad[2];
+
+			cout << "갈림길로 돌아갔습니다.\n\n";
+			continue;
 		}
-		
+		else cout << " ) : ";
+
 		int order;
 		cin >> order;
 
-		int *path = move(order, curRow, curCol, size);
-		
+		if (pathCount > 1) {
+			int* cross = new int[3];
+			cross[0] = curRow;
+			cross[1] = curCol;
+			cross[2] = order;
+
+			S.push(cross);
+		}
+
+		path = move(order, curRow, curCol, size);
+		curRow = path[0];
+		curCol = path[1];
+		vis = path[2];
 
 		if (curRow == size - 2 && curCol == size - 1) {
 			cout << "미로를 빠져나왔습니다!\n";
 			break;
 		}
 	}
-	
 }
