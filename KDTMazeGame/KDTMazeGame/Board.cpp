@@ -193,10 +193,14 @@ void Board::findPath()
 	}
 
 	cout << "\n\n";
+
+	_vis = new bool* [_size];
+	for (int i = 0; i < _size; i++) {
+		_vis[i] = new bool[_size] {};
+	}
 }
 
 Board::~Board() {
-	cout << "Board 소멸자 호출!!\n\n";
 	for (int i = 0; i < _count; i++) delete[] autoPath[i];
 	delete[] autoPath;
 
