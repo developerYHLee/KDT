@@ -5,12 +5,14 @@
 #include <cstdlib>
 #include <ctime>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
 class Board
 {
 private:
+	int* dx, * dy;
 	struct Path {
 		int _row, _col, _vis;
 
@@ -21,10 +23,12 @@ private:
 		}
 	};
 
-	int _size, endRow, endCol;
-	bool** isWall;
+	int _size, endRow, endCol, _count;
+	bool** isWall, ** _vis;
+	int** autoPath;
 
 	void setStart();
+	void findPath();
 public:
 	Board(int size);
 
@@ -35,6 +39,8 @@ public:
 	int getEndRow();
 	int getEndCol();
 	int bfs(bool printDis);
+	bool search(int row, int col, int count);
+	~Board();
 };
 
 #endif // !__BOARD_H__

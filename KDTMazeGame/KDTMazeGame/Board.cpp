@@ -2,11 +2,24 @@
 
 Board::Board(int size)
 {
+	dx = new int[4] { -1, 1, 0, 0 };
+	dy = new int[4] { 0, 0, -1, 1 };
 	_size = size;
 	endRow = -1;
 	endCol = -1;
-
+	_count = 0;
 	Initialize();
+
+	autoPath = new int* [_count];
+	for (int i = 0; i < _count; i++) {
+		autoPath[i] = new int[2]{ 0,0 };
+	}
+
+	_vis = new bool* [_size];
+	for (int i = 0; i < _size; i++) {
+		_vis[i] = new bool[_size] {};
+	}
+
 	Draw();
 }
 
@@ -63,7 +76,7 @@ void Board::Initialize()
 		endRow = rand() % _size;
 		endCol = rand() % _size;
 
-		if (!isWall[endRow][endCol] && bfs(false) > _size) break;
+		if (!isWall[endRow][endCol] && (_count = bfs(false)) > _size) break;
 	}
 }
 
@@ -97,8 +110,6 @@ int Board::getEndCol()
 }
 
 int Board::bfs(bool printDis) {
-	int dx[] = { -1, 1, 0, 0 }, dy[] = { 0, 0, -1, 1 };
-
 	bool** vis = new bool* [_size];
 	for (int i = 0; i < _size; i++) {
 		vis[i] = new bool[_size] {};
@@ -135,7 +146,63 @@ int Board::bfs(bool printDis) {
 	return -1;
 }
 
+bool Board::search(int row, int col, int count)
+{
+	if (row == endRow && col == endCol) {
+		//autoPath를 이용한 경로 출력
+		findPath();
+		return true;
+	}
+
+	if (_count <= count) return false;
+	_vis[row][col] = true;
+
+	for (int i = 0; i < 4; i++) {
+		int r = row + dx[i];
+		int c = col + dy[i];
+
+		if (r < 0 || c < 0 || r >= _size || c >= _size || isWall[r][c] || _vis[r][c]) continue;
+
+		autoPath[count][0] = r;
+		autoPath[count][1] = c;
+		if (search(r, c, count + 1)) return true;
+	}
+
+	return false;
+}
+
 void Board::setStart() {
 	isWall[0][0] = false;
 	isWall[0][1] = false;
+}
+
+void Board::findPath()
+{
+	int pathRow = 0, pathCol = 0;
+
+	for (int i = 0; i < _count; i++) {
+		int curRow = autoPath[i][0], curCol = autoPath[i][1];
+
+		if (curRow == pathRow - 1) cout << "↑";
+		else if (curRow == pathRow + 1) cout << "↓";
+		else if (curCol == pathCol - 1) cout << "←";
+		else if (curCol == pathCol + 1) cout << "→";
+
+		pathRow = curRow;
+		pathCol = curCol;
+	}
+
+	cout << "\n\n";
+}
+
+Board::~Board() {
+	cout << "Board 소멸자 호출!!\n\n";
+	for (int i = 0; i < _count; i++) delete[] autoPath[i];
+	delete[] autoPath;
+
+	for (int i = 0; i < _size; i++) delete[] isWall[i];
+	delete[] isWall;
+
+	for (int i = 0; i < _size; i++) delete[] _vis[i];
+	delete[] _vis;
 }

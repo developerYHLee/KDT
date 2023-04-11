@@ -27,12 +27,10 @@ private:
 	int* move(int order, int row, int col);
 
 public:
-	StartGame(Board board);
+	StartGame(Board *board);
 	void printDir(int i);
 	void playGame();
 };
 
 
 #endif // ! __STARTGAME_H__
-
-

@@ -1,11 +1,11 @@
 #include "StartGame.h"
 
-StartGame::StartGame(Board board)
+StartGame::StartGame(Board *board)
 {
-	isWall = board.getIsWall();
-	_size = board.getSize();
-	endRow = board.getEndRow();
-	endCol = board.getEndCol();
+	isWall = board->getIsWall();
+	_size = board->getSize();
+	endRow = board->getEndRow();
+	endCol = board->getEndCol();
 }
 
 int* StartGame::move(int order, int row, int col) {
@@ -38,7 +38,7 @@ int* StartGame::move(int order, int row, int col) {
 		col--;
 		if (col < 0 || isWall[row][col]) cout << "왼쪽으로 이동할 수 없습니다. 다시 선택하세요.\n\n";
 		else {
-			cout << "왼쪽로 이동!\n\n";
+			cout << "왼쪽으로 이동!\n\n";
 			res[1] = col;
 			res[2] = 3;
 		}
@@ -47,7 +47,7 @@ int* StartGame::move(int order, int row, int col) {
 		col++;
 		if (col >= _size || isWall[row][col]) cout << "오른쪽으로 이동할 수 없습니다. 다시 선택하세요.\n\n";
 		else {
-			cout << "오른쪽로 이동!\n\n";
+			cout << "오른쪽으로 이동!\n\n";
 			res[1] = col;
 			res[2] = 2;
 		}
@@ -57,10 +57,10 @@ int* StartGame::move(int order, int row, int col) {
 }
 
 void StartGame::printDir(int i) {
-	if (i == 0) cout << " 상 : 0";
-	else if (i == 1) cout << " 하 : 1";
-	else if (i == 2) cout << " 좌 : 2";
-	else cout << " 우 : 3";
+	if (i == 0) cout << " ↑ : 0";
+	else if (i == 1) cout << " ↓ : 1";
+	else if (i == 2) cout << " ← : 2";
+	else cout << " → : 3";
 }
 
 void StartGame::playGame()
