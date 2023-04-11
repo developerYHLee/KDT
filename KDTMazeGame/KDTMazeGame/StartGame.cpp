@@ -60,7 +60,7 @@ void StartGame::printDir(int i) {
 	if (i == 0) cout << " ↑ : 0";
 	else if (i == 1) cout << " ↓ : 1";
 	else if (i == 2) cout << " ← : 2";
-	else cout << " → : 3";
+	else cout << " → : 3 ";
 }
 
 void StartGame::playGame()
@@ -89,12 +89,12 @@ void StartGame::playGame()
 		int* path;
 		if (pathCount == 0) {
 			if (curRow == 0 && curCol == 0) {
-				cout << " ) :\n시작 지점입니다.\n\n";
+				cout << ") :\n시작 지점입니다.\n\n";
 				vis = 0;
 				continue;
 			}
 
-			cout << " )\n";
+			cout << ")\n";
 			cout << "길이 막혔으니 돌아가야합니다!\n";
 
 			curRow = P->_row;
@@ -105,7 +105,7 @@ void StartGame::playGame()
 
 			continue;
 		}
-		else cout << " ) : ";
+		else cout << ") : ";
 
 		int order;
 		cin >> order;
