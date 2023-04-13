@@ -98,16 +98,8 @@ void Board::Draw()
 
 int Board::getSize() { return _size; }
 bool** Board::getIsWall() { return isWall; }
-
-int Board::getEndRow()
-{
-	return endRow;
-}
-
-int Board::getEndCol()
-{
-	return endCol;
-}
+int Board::getEndRow() { return endRow; }
+int Board::getEndCol() { return endCol; }
 
 int Board::bfs(bool printDis) {
 	bool** vis = new bool* [_size];

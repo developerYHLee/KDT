@@ -20,6 +20,12 @@ private:
 			_col = col;
 			_vis = vis;
 		}
+
+		void change(int row, int col, int vis) {
+			_row = row;
+			_col = col;
+			_vis = vis;
+		}
 	};
 
 	bool** isWall;

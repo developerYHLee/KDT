@@ -121,7 +121,7 @@ void StartGame::playGame()
 			continue;
 		}
 
-		if (pathCount > 1) P = new Path(curRow, curCol, order);
+		if (pathCount > 1) P->change(curRow, curCol, order);
 
 		path = move(order, curRow, curCol);
 		curRow = path[0];
